@@ -1,4 +1,5 @@
 include $(TOPDIR)/rules.mk
+
 PKG_NAME:=luci-app-kea
 PKG_VERSION:=0.1.0
 PKG_RELEASE:=1
@@ -9,6 +10,7 @@ PKG_MAINTAINER:=Thomas Richter <thomasesr@gmail.com>
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
+
 define Package/luci-app-kea
   SECTION:=luci
   CATEGORY:=LuCI
@@ -29,7 +31,8 @@ define Build/Compile
 endef
 
 define Package/luci-app-kea/install
-	$(CP) ./luci-app-kea/root/* $(1)/
+	$(CP) ./root/* $(1)/
 endef
 
 $(eval $(call BuildPackage,luci-app-kea))
+
