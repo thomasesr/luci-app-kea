@@ -1,11 +1,35 @@
 include $(TOPDIR)/rules.mk
-
-LUCI_TITLE:=LuCI support for Kea DHCP
-LUCI_DEPENDS:=+luci-base +rpcd +rpcd-mod-ucode +kea-uci +kea-dhcp4 +kea-ctrl +kea-hook-lease-cmds
-LUCI_PKGARCH:=all
+PKG_NAME:=luci-app-kea
+PKG_VERSION:=0.1.0
+PKG_RELEASE:=1
+PKGARCH:=all
 
 PKG_LICENSE:=Apache-2.0
 PKG_MAINTAINER:=Thomas Richter <thomasesr@gmail.com>
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 include $(TOPDIR)/feeds/luci/luci.mk
+define Package/luci-app-kea
+  SECTION:=luci
+  CATEGORY:=LuCI
+  SUBMENU:=3. Applications
+  TITLE:=Kea Application for LuCI network interface editor
+  DEPENDS:=+luci-base +rpcd +rpcd-mod-ucode +kea-uci +kea-dhcp4 +kea-ctrl +kea-hook-lease-cmds
+endef
 
+define Package/luci-app-kea/description
+ Adds Kea-aware DHCP tab behavior to LuCI interface editor.
+endef
+
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+endef
+
+define Build/Compile
+endef
+
+define Package/luci-app-kea/install
+	$(CP) ./luci-app-kea/root/* $(1)/
+endef
+
+$(eval $(call BuildPackage,luci-app-kea))
