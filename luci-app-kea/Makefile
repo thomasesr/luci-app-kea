@@ -8,7 +8,7 @@ PKG_LICENSE:=Apache-2.0
 PKG_MAINTAINER:=Thomas Richter <thomasesr@gmail.com>
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
-include $(TOPDIR)/feeds/luci/luci.mk
+include $(INCLUDE_DIR)/package.mk
 define Package/luci-app-kea
   SECTION:=luci
   CATEGORY:=LuCI
