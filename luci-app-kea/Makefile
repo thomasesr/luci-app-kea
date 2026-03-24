@@ -16,7 +16,7 @@ define Package/luci-app-kea
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=Kea Application for LuCI network interface editor
-  DEPENDS:=+luci-base +rpcd +rpcd-mod-ucode +kea-hook-lease-cmds +kea-uci @PACKAGE_kea-ctrl @PACKAGE_kea-dhcp4
+  DEPENDS:=+luci-base +rpcd +rpcd-mod-ucode +kea-hook-lease-cmds +kea-uci +kea-ctrl +kea-dhcp4
 endef
 
 define Package/luci-app-kea/description
