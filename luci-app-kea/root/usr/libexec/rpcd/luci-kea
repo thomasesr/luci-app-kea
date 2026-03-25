@@ -1,2 +1,53 @@
 #!/bin/sh
-echo '{}'
+
+. /usr/share/libubox/jshn.sh
+
+case "$1" in
+	list)
+		json_init
+		json_add_object luci.kea
+		json_add_array status
+		json_add_string "" "Returns Kea service summary"
+		json_close_array
+		json_close_object
+		json_dump
+	return 0
+	;;
+
+	call)
+		obj="$2"
+		method="$3"
+
+		[ "$obj" = "luci.kea" ] || exit 1
+
+		case "$method" in
+			status)
+				running=0
+				ctrl_reachable=0
+				subnets=0
+				reservations=0
+
+				if /etc/init.d/kea enabled >/dev/null 2>&1 || /etc/init.d/kea running >/dev/null 2>&1; then
+					/etc/init.d/kea running >/dev/null 2>&1 && running=1
+				fi
+
+				subnets="$(uci -q show kea | grep -c "=subnet4" 2>/dev/null)"
+				reservations="$(uci -q show kea | grep -c "=reservation4" 2>/dev/null)"
+
+				if command -v kea-shell >/dev/null 2>&1; then
+					ctrl_reachable=1
+				fi
+
+				json_init
+				json_add_boolean running "$running"
+				json_add_boolean ctrl_reachable "$ctrl_reachable"
+				json_add_int subnets "${subnets:-0}"
+				json_add_int reservations "${reservations:-0}"
+				json_dump
+			;;
+			*)
+				exit 1
+			;;
+		esac
+	;;
+esac
