@@ -4,6 +4,9 @@
     "order": 60,
     "action": {
       "type": "firstchild"
+    },
+    "depends": {
+      "acl": [ "luci-app-kea" ]
     }
   },
   "admin/services/kea/overview": {
@@ -12,6 +15,9 @@
     "action": {
       "type": "view",
       "path": "kea/overview"
+    },
+    "depends": {
+      "acl": [ "luci-app-kea" ]
     }
   },
   "admin/services/kea/subnets": {
@@ -20,6 +26,9 @@
     "action": {
       "type": "view",
       "path": "kea/subnets"
+    },
+    "depends": {
+      "acl": [ "luci-app-kea" ]
     }
   }
 }
