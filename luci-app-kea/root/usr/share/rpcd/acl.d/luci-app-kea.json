@@ -1,10 +1,11 @@
 {
   "luci-app-kea": {
-    "description": "Grant access to Kea management RPCs",
+    "description": "Grant access to luci-app-kea",
     "read": {
       "ubus": {
         "luci.kea": [ "status" ]
-      }
+      },
+      "uci": [ "kea" ]
     },
     "write": {
       "ubus": {
